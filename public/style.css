@@ -604,7 +604,96 @@ form button[type="button"]:hover {
 #locationdiv label {
     margin-top: 5px;
 }
+/* =========================================
+   LOCATE ME ON MAP
+   ========================================= */
 
+#shopregisterlatitude + a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: fit-content;
+    margin: 12px auto 4px;
+    padding: 9px 16px;
+
+    color: #2563eb;
+    background: rgba(239, 246, 255, 0.9);
+
+    border: 1px solid #bfdbfe;
+    border-radius: 50px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* Map pin icon */
+
+#shopregisterlatitude + a::before {
+    content: "📍";
+
+    font-size: 16px;
+
+    display: inline-block;
+
+    animation: mapPinFloat 1.8s ease-in-out infinite;
+}
+
+
+/* Hover */
+
+#shopregisterlatitude + a:hover {
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    border-color: transparent;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.22);
+}
+
+
+/* Click */
+
+#shopregisterlatitude + a:active {
+    transform: translateY(-1px) scale(0.97);
+}
+
+
+/* Pin animation */
+
+@keyframes mapPinFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
 
 /* =========================================================
    BOTTOM TEXT
