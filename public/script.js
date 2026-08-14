@@ -5,6 +5,8 @@ let shopregisterdiv=document.getElementById("shopregisterdiv");
 let shoplogindiv=document.getElementById("shoplogindiv");
 let locationdiv=document.getElementById("locationdiv");
 let findlocationbtn=document.getElementById("findlocationbtn");
+let placesdata;
+
 function initial(){
     locationdiv.style.display="none";
     userregisterdiv.style.display="none";
@@ -30,11 +32,41 @@ async function loaduserform() {
 async function loaduserregister(){
     initial();
     userregisterdiv.style.display="block";
+    let data=await fetch("/places",{
+        method:"GET"
+    });
+    placesdata=await data.json();
+    if(placesdata.status==0){
+        alert("unable to load places");
+        return;
+    }
+    let select=document.getElementById("userregisterplace");
+    for(let place of placesdata){
+        let option=document.createElement("option");
+        option.value=place.id;
+        option.innerText=place.place_name;
+        select.appendChild(option);
+    }
 }
 async function loadshopregister(){
     initial();
     shopregisterdiv.style.display="block";
     findlocationbtn.innerText="Find Location";
+    let data=await fetch("/places",{
+        method:"GET"
+    });
+    placesdata=await data.json();
+    if(placesdata.status==0){
+        alert("unable to load places");
+        return;
+    }
+    let select=document.getElementById("shopregisterplace");
+    for(let place of placesdata){
+        let option=document.createElement("option");
+        option.value=place.id;
+        option.innerText=place.place_name;
+        select.appendChild(option);
+    }
 }
 function showlocationdiv(){
     locationdiv.style.display="block";
@@ -47,7 +79,6 @@ function findlocation() {
     }
     navigator.geolocation.getCurrentPosition(
         function(position) {
-
             let latitude = position.coords.latitude;
             let longitude = position.coords.longitude;
             showlocationdiv();
@@ -84,3 +115,4 @@ function locateonmap(){
     let mapurl = `https://www.google.com/maps?q=${latitude},${longitude}`;
     window.open(mapurl, "_blank");
 }
+
