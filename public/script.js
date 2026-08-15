@@ -6,7 +6,7 @@ let shoplogindiv=document.getElementById("shoplogindiv");
 let locationdiv=document.getElementById("locationdiv");
 let findlocationbtn=document.getElementById("findlocationbtn");
 let placesdata;
-
+loadplaces();
 function initial(){
     locationdiv.style.display="none";
     userregisterdiv.style.display="none";
@@ -29,9 +29,7 @@ async function loaduserform() {
     initial();
     userlogindiv.style.display="block";
 }
-async function loaduserregister(){
-    initial();
-    userregisterdiv.style.display="block";
+async function loadplaces(){
     let data=await fetch("/places",{
         method:"GET"
     });
@@ -40,10 +38,14 @@ async function loaduserregister(){
         alert("unable to load places");
         return;
     }
+}
+async function loaduserregister(){
+    initial();
+    userregisterdiv.style.display="block";
     let select=document.getElementById("userregisterplace");
     for(let place of placesdata){
         let option=document.createElement("option");
-        option.value=place.id;
+        option.value=place.place_name;
         option.innerText=place.place_name;
         select.appendChild(option);
     }
@@ -52,14 +54,6 @@ async function loadshopregister(){
     initial();
     shopregisterdiv.style.display="block";
     findlocationbtn.innerText="Find Location";
-    let data=await fetch("/places",{
-        method:"GET"
-    });
-    placesdata=await data.json();
-    if(placesdata.status==0){
-        alert("unable to load places");
-        return;
-    }
     let select=document.getElementById("shopregisterplace");
     for(let place of placesdata){
         let option=document.createElement("option");
@@ -116,3 +110,12 @@ function locateonmap(){
     window.open(mapurl, "_blank");
 }
 
+
+
+async function getmedical(x) {
+    let mobile_number="1";
+    let url=`/user/getmedical?mobile_number=${x}`;
+    let data=await fetch(url);
+    let response=await data.json();
+    console.log(response);
+}

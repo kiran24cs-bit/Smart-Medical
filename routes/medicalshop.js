@@ -19,8 +19,4 @@ router.post("/addshop",async (req,res)=>{
     });
 });
 
-
-
-
-
 module.exports=router;
