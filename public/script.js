@@ -55,7 +55,7 @@ async function loadshopregister(){
     initial();
     shopregisterdiv.style.display="block";
     findlocationbtn.innerText="Find Location";
-    let select=document.getElementById("shopregisterplace");
+    let select=document.getElementById("shopregisterplaces");
     for(let place of placesdata){
         let option=document.createElement("option");
         option.value=place.place_name;
@@ -175,8 +175,7 @@ shopregister.addEventListener("submit",async (event)=>{
         }
         return ;
     }
-    localStorage.setItem("logger",JSON.stringify(response));
-    window.location.href="shop.html";
+    alert("resuest sent requset id : " + response.id);
 })
 shoplogin.addEventListener("submit",async (event)=>{
     event.preventDefault();

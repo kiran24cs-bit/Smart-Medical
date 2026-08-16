@@ -87,9 +87,17 @@
         <input id="shopregistername" type="text" name="medical_shop_name" placeholder="Medical Shop Name" required>
 
         <label for="shopregisterplace">Place Name</label>
-        <select id="shopregisterplace" name="place_name" required>
-            <option value="" disabled selected>Select Place</option>
-        </select>
+
+<input
+    id="shopregisterplace"
+    type="text"
+    name="place_name"
+    list="shopregisterplaces"
+    placeholder="Select or enter place"
+    required
+>
+
+<datalist id="shopregisterplaces"></datalist>
 
         <label for="shopregisterpassword">Password</label>
         <input id="shopregisterpassword" type="password" name="password" placeholder="Password" required>

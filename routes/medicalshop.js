@@ -23,7 +23,7 @@ router.post("/addshop",async (req,res)=>{
 router.post("/shopregister",async (req,res)=>{
     let data=req.body;
     let hashedpassword=await bcrypt.hash(data.password,10);
-    let query="insert into medical_shop(owner_name,mobile_number,medical_shop_name,place_name,password,longitude,latitude) values(?,?,?,?,?,?,?)";
+    let query="insert into shoprequest(owner_name,mobile_number,medical_shop_name,place_name,password,longitude,latitude) values(?,?,?,?,?,?,?)";
     db.query(query,[data.owner_name,data.mobile_number,data.medical_shop_name,data.place_name,hashedpassword,data.longitude,data.latitude],(error,result)=>{
         if(error){
             res.json({
