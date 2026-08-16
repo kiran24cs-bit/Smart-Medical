@@ -1,0 +1,872 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #2563eb;
+    --secondary: #06b6d4;
+    --accent: #14b8a6;
+    --primary-dark: #1d4ed8;
+    --text: #172033;
+    --muted: #64748b;
+    --border: #dbe4ef;
+    --card: rgba(255, 255, 255, 0.88);
+    --shadow: 0 20px 60px rgba(30, 64, 175, 0.12);
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+
+    background:
+        radial-gradient(circle at 10% 15%, rgba(37, 99, 235, 0.1), transparent 30%),
+        radial-gradient(circle at 90% 85%, rgba(20, 184, 166, 0.1), transparent 30%),
+        linear-gradient(135deg, #f8fbff, #eef6fb);
+
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+header {
+    width: 100%;
+    min-height: 78px;
+    padding: 16px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(219, 228, 239, 0.7);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+#shopheading {
+    font-size: 25px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#shopnamecontainer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+#shopname {
+    font-size: 20px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+#shopdetails {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#shopprofile {
+    text-align: right;
+}
+
+#ownername {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#shopmobile {
+    margin-top: 3px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+#profilebtn,
+#logoutbtn {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+#profilebtn {
+    background: #64748b;
+}
+
+#profilebtn:hover {
+    background: #475569;
+    transform: translateY(-2px);
+}
+
+#logoutbtn {
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+#logoutbtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.25);
+}
+
+main {
+    width: min(1100px, 92%);
+    margin: 45px auto 60px;
+    flex: 1;
+}
+
+#searchsection {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+    margin-bottom: 35px;
+
+    flex-wrap: wrap;
+}
+
+#medicinesearch {
+    flex: 1;
+
+    min-width: 250px;
+    max-width: 500px;
+
+    padding: 15px 21px;
+
+    border: 1px solid var(--border);
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    color: var(--text);
+    font-size: 15px;
+
+    outline: none;
+
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.07);
+
+    transition: 0.25s ease;
+}
+
+#medicinesearch::placeholder {
+    color: #94a3b8;
+}
+
+#medicinesearch:focus {
+    border-color: var(--primary);
+    background: white;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.09),
+        0 12px 30px rgba(37, 99, 235, 0.1);
+
+    transform: translateY(-2px);
+}
+
+#updatestockbtn,
+#addmedicinebtn {
+    border: none;
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: 0.25s ease;
+}
+
+#updatestockbtn {
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+#addmedicinebtn {
+    background: linear-gradient(
+        135deg,
+        #0f766e,
+        var(--accent)
+    );
+
+    box-shadow: 0 8px 20px rgba(20, 184, 166, 0.18);
+}
+
+#updatestockbtn:hover,
+#addmedicinebtn:hover {
+    transform: translateY(-3px);
+}
+
+#updatestockbtn:active,
+#addmedicinebtn:active,
+#profilebtn:active,
+#logoutbtn:active {
+    transform: scale(0.97);
+}
+
+#medicinetablediv {
+    width: 100%;
+
+    background: var(--card);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    overflow-x: auto;
+}
+
+#medicinetable {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+#medicinetable thead {
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+}
+
+#medicinetable th {
+    padding: 16px 18px;
+
+    text-align: left;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+#medicinetable th:first-child {
+    border-radius: 20px 0 0 0;
+}
+
+#medicinetable th:last-child {
+    border-radius: 0 20px 0 0;
+}
+
+#medicinetable td {
+    padding: 16px 18px;
+
+    font-size: 14px;
+
+    color: #334155;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#medicinetable tbody tr {
+    transition: 0.2s ease;
+}
+
+#medicinetable tbody tr:hover {
+    background: rgba(239, 246, 255, 0.8);
+}
+
+#medicinetable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#medicinetable td:first-child {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+#medicinetable td:last-child {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+footer {
+    margin-top: auto;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    border-top: 1px solid rgba(219, 228, 239, 0.7);
+
+    background: rgba(255, 255, 255, 0.45);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+footer a {
+    color: #64748b;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--primary);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eef3f8;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        var(--primary),
+        var(--secondary)
+    );
+
+    border-radius: 20px;
+}
+
+::selection {
+    background: rgba(37, 99, 235, 0.18);
+    color: var(--primary-dark);
+}
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 15px 4%;
+    }
+
+    #shopheading {
+        font-size: 20px;
+    }
+
+    #shopname {
+        font-size: 16px;
+    }
+
+    #shopdetails {
+        gap: 7px;
+    }
+
+    #shopprofile {
+        display: none;
+    }
+
+    #profilebtn,
+    #logoutbtn {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    main {
+        width: 94%;
+        margin-top: 30px;
+    }
+
+    #searchsection {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #medicinesearch {
+        width: 100%;
+        max-width: none;
+    }
+
+    #updatestockbtn,
+    #addmedicinebtn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    #shopheading {
+        font-size: 18px;
+    }
+
+    #shopname {
+        font-size: 14px;
+    }
+
+    #profilebtn {
+        display: none;
+    }
+}
+#addmedicinediv {
+    width: min(500px, 92%);
+
+    margin: 30px auto;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 20px;
+
+    box-shadow: 0 20px 60px rgba(30, 64, 175, 0.12);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+#addmedicinediv label {
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+#addmedicinediv input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #dbe4ef;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+#addmedicinediv input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.09);
+}
+
+#addmedicinediv input::placeholder {
+    color: #94a3b8;
+}
+
+#addmedicinediv button {
+    margin-top: 18px;
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.18);
+
+    transition: 0.25s ease;
+}
+
+#addmedicinediv button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.25);
+}
+
+#addmedicinediv button:active {
+    transform: scale(0.98);
+}
+#medicineStockEditor {
+    width: min(500px, 92%);
+    margin: 30px auto;
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 60px rgba(30, 64, 175, 0.12);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+#medicineStockEditor label {
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+#medicineStockEditor input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #dbe4ef;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+#medicineStockEditor input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.09);
+}
+
+#medicineStockEditor input[readonly] {
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    cursor: not-allowed;
+}
+
+#medicineStockEditor input::placeholder {
+    color: #94a3b8;
+}
+
+#medicineStockEditorUpdate,
+#medicineStockEditorDelete {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+#medicineStockEditorUpdate {
+    margin-top: 18px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+#medicineStockEditorDelete {
+    margin-top: 5px;
+
+    background: linear-gradient(
+        135deg,
+        #dc2626,
+        #ef4444
+    );
+
+    box-shadow:
+        0 8px 20px rgba(220, 38, 38, 0.16);
+}
+
+#medicineStockEditorUpdate:hover,
+#medicineStockEditorDelete:hover {
+    transform: translateY(-2px);
+}
+
+#medicineStockEditorUpdate:hover {
+    box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.25);
+}
+
+#medicineStockEditorDelete:hover {
+    box-shadow:
+        0 12px 28px rgba(220, 38, 38, 0.24);
+}
+
+#medicineStockEditorUpdate:active,
+#medicineStockEditorDelete:active {
+    transform: scale(0.98);
+}
+
+#medicineAlertButton {
+    padding: 13px 18px;
+    border: none;
+    border-radius: 12px;
+
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #f59e0b,
+        #f97316
+    );
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    box-shadow:
+        0 8px 20px rgba(245, 158, 11, 0.18);
+
+    transition: 0.25s ease;
+}
+
+#medicineAlertButton:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 28px rgba(245, 158, 11, 0.28);
+}
+
+#medicineAlertButton:active {
+    transform: scale(0.97);
+}
+#shopProfileDiv {
+    width: min(550px, 92%);
+    margin: 35px auto;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+
+    box-shadow: 0 20px 60px rgba(30, 64, 175, 0.12);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+#shopProfileId {
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+
+    color: #2563eb;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-align: center;
+}
+
+#shopProfileDiv > input,
+#shopPasswordChangeDiv input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #dbe4ef;
+    border-radius: 10px;
+
+    background: white;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+#shopProfileDiv > input:focus,
+#shopPasswordChangeDiv input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.09);
+}
+
+#shopProfileDiv > input[readonly] {
+    background: #f8fafc;
+
+    color: #475569;
+
+    cursor: default;
+}
+
+#shopCurrentLocationBtn,
+#shopNewLocationBtn,
+#shopChangePasswordBtn,
+#shopConfirmPasswordBtn {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+    border-radius: 11px;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+#shopCurrentLocationBtn {
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+}
+
+#shopNewLocationBtn {
+    background: #64748b;
+}
+
+#shopChangePasswordBtn {
+    margin-top: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #0f766e,
+        #14b8a6
+    );
+}
+
+#shopConfirmPasswordBtn {
+    margin-top: 5px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+}
+
+#shopCurrentLocationBtn:hover,
+#shopNewLocationBtn:hover,
+#shopChangePasswordBtn:hover,
+#shopConfirmPasswordBtn:hover {
+    transform: translateY(-2px);
+}
+
+#shopCurrentLocationBtn:active,
+#shopNewLocationBtn:active,
+#shopChangePasswordBtn:active,
+#shopConfirmPasswordBtn:active {
+    transform: scale(0.98);
+}
+
+#shopPasswordChangeDiv {
+    display: none;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding-top: 10px;
+}

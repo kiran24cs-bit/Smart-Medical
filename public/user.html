@@ -3,14 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Smart Medical</title>
+    <link rel="stylesheet" href="user.css">
 </head>
+
 <body>
-    <p id="xyz">hi</p>
-    <script>
-        let a=JSON.parse(localStorage.getItem("logger"));
-        document.getElementById("xyz").innerHTML=a.id;
-        
-    </script>
+
+    <header>
+        <p id="shopheading">Smart Medical</p>
+
+        <div id="userdetails">
+            <div>
+                <p id="username">Kiran</p>
+                <p id="userplace">Bangalore</p>
+            </div>
+
+            <button id="logoutbtn">Logout</button>
+        </div>
+    </header>
+
+
+    <main>
+
+        <section id="searchsection">
+            <input
+                type="text"
+                id="medicinesearch"
+                placeholder="Search medicine..."
+                autocomplete="off"
+            >
+        </section>
+
+
+        <section id="medicinetablediv">
+
+            <table id="medicinetable">
+
+                <thead>
+                    <tr>
+                        <th>Medical Shop Name</th>
+                        <th>Mobile Number</th>
+                        <th>Medicine Name</th>
+                        <th>Medicine Stock</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+
+                <tbody id="medicinetablebody">
+                    <!-- Medicine data will be added using JavaScript -->
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <a>Kiran 2026</a>
+    </footer>
+
+    <script src="script.js"></script>
+
 </body>
 </html>

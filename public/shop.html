@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Medical - Shop</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+
+<body>
+
+<header>
+    <p id="shopheading">Smart Medical</p>
+
+    <div id="shopnamecontainer">
+        <p id="shopname">ABC Medicals</p>
+    </div>
+
+    <div id="shopdetails">
+        <div id="shopprofile">
+            <p id="ownername">Kiran</p>
+            <p id="shopmobile">9000000000</p>
+        </div>
+
+        <button id="profilebtn">Profile</button>
+
+        <button id="logoutbtn">Logout</button>
+    </div>
+</header>
+
+<main>
+
+    <section id="searchsection">
+
+        <input
+            type="text"
+            id="medicinesearch"
+            placeholder="Search medicine..."
+            autocomplete="off"
+        >
+
+        <button id="updatestockbtn">
+            Update Stock
+        </button>
+
+        <button id="addmedicinebtn">
+            Add New Medicine
+        </button>
+        <button id="medicineAlertButton">
+            ⚠ Stock Alert
+        </button>
+
+    </section>
+
+    <section id="medicinetablediv">
+
+        <table id="medicinetable">
+
+            <thead>
+                <tr>
+                    <th>Medicine ID</th>
+                    <th>Medicine Name</th>
+                    <th>Stock</th>
+                    <th>Price (Strip)</th>
+                </tr>
+            </thead>
+
+            <tbody id="medicinetablebody">
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+<div id="addmedicinediv">
+
+    <label for="medicinename">Medicine Name</label>
+    <input
+        type="text"
+        id="medicinename"
+        name="medicine_name"
+        placeholder="Medicine Name"
+        required
+    >
+
+    <label for="medicinestock">Stock</label>
+    <input
+        type="number"
+        id="medicinestock"
+        name="stock"
+        placeholder="Stock"
+        min="0"
+        required
+    >
+    <label for="medicineprice">Price</label>
+    <input
+        type="number"
+        id="medicineprice"
+        name="price"
+        placeholder="Price"
+        min="0"
+        required
+    >
+
+    <button type="button" id="addmedicinebtn">
+        Add Medicine
+    </button>
+
+</div>
+<div id="medicineStockEditor">
+
+    <label for="medicineStockEditorName">
+        Medicine Name
+    </label>
+
+    <input
+        type="text"
+        id="medicineStockEditorName"
+        name="medicine_name"
+        placeholder="Medicine Name"
+    >
+
+    <label for="medicineStockEditorIncrease">
+        Increase Stock
+    </label>
+
+    <input
+        type="number"
+        id="medicineStockEditorIncrease"
+        name="increase_stock"
+        placeholder="Enter quantity"
+        min="0"
+    >
+
+    <label for="medicineStockEditorDecrease">
+        Decrease Stock
+    </label>
+
+    <input
+        type="number"
+        id="medicineStockEditorDecrease"
+        name="decrease_stock"
+        placeholder="Enter quantity"
+        min="0"
+    >
+    <label for="medicinepriceupdate">
+        New Price
+    </label>
+
+    <input
+        type="number"
+        id="medicinepriceupdate"
+        name="priceupdate"
+        placeholder="Enter new price"
+        min="0"
+    >
+
+    <button
+        type="button"
+        id="medicineStockEditorUpdate">
+        Update Stock
+    </button>
+
+    <button
+        type="button"
+        id="medicineStockEditorDelete">
+        Delete Medicine
+    </button>
+
+</div>
+
+<div id="shopProfileDiv">
+
+    <p id="shopProfileId">1001</p>
+
+    <input
+        type="text"
+        id="shopProfileOwner"
+        name="owner_name"
+        placeholder="Owner Name"
+        readonly
+    >
+
+    <input
+        type="tel"
+        id="shopProfileMobile"
+        name="mobile_number"
+        placeholder="Mobile Number"
+        readonly
+    >
+
+    <input
+        type="text"
+        id="shopProfileName"
+        name="medical_shop_name"
+        placeholder="Medical Shop Name"
+        readonly
+    >
+
+    <input
+        type="text"
+        id="shopProfilePlace"
+        name="place_name"
+        placeholder="Place Name"
+        readonly
+    >
+
+    <input
+        type="text"
+        id="shopProfileLongitude"
+        name="longitude"
+        placeholder="Longitude"
+        readonly
+    >
+
+    <input
+        type="text"
+        id="shopProfileLatitude"
+        name="latitude"
+        placeholder="Latitude"
+        readonly
+    >
+
+    <button type="button" id="shopCurrentLocationBtn">
+        📍 Current Location
+    </button>
+
+    <button type="button" id="shopNewLocationBtn">
+        Change Location
+    </button>
+
+    <button type="button" id="shopChangePasswordBtn">
+        Change Password
+    </button>
+
+    <div id="shopPasswordChangeDiv">
+
+        <input
+            type="password"
+            id="shopOldPassword"
+            name="old_password"
+            placeholder="Old Password"
+        >
+
+        <input
+            type="password"
+            id="shopNewPassword"
+            name="new_password"
+            placeholder="New Password"
+        >
+
+        <button type="button" id="shopConfirmPasswordBtn">
+            Confirm Change
+        </button>
+
+    </div>
+
+</div>
+<footer>
+    <a>Kiran 2026</a>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
