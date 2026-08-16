@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="xyz">hi</p>
+    <script>
+        let a=JSON.parse(localStorage.getItem("logger"));
+        document.getElementById("xyz").innerHTML=a.id;
+        
+    </script>
+</body>
+</html>

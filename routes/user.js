@@ -1,6 +1,7 @@
 const db=require("../db/db.js");
 const express=require("express");
 const router=express.Router();
+const bcrypt=require("bcrypt");
 
 router.get("/getmedical",(req,res)=>{
     const mobile_number  =req.query.mobile_number;
@@ -31,6 +32,23 @@ WHERE u.mobile_number = ?`;
     });
 });
 
-
+router.post("/userregister",async (req,res)=>{
+    let data=req.body;
+    let hashedpassword=await bcrypt.hash(data.password,10);
+    let query="insert into users(mobile_number,name,place_name,password) values(?,?,?,?)";
+    db.query(query,[data.mobile_number,data.name,data.place_name,hashedpassword],(error,result)=>{
+        if(error){
+            res.json({
+                status:0,
+                err:error.errno
+            });
+            return;
+        }
+        res.json({
+            status:1,
+            id:result.insertId
+        });
+    })
+});
 
 module.exports=router;
