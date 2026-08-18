@@ -183,3 +183,11 @@ shoplogin.addEventListener("submit",async (event)=>{
     let obj = Object.fromEntries(form);
     console.log(obj);
 })
+
+
+async function ext(){
+    let data=await fetch("/extraht");
+    console.log(data);
+    data=await data.json();
+    console.log(data);
+}
