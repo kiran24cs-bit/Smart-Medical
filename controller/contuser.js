@@ -1,6 +1,5 @@
 const db=require("../db/db.js");
 const bcrypt=require("bcrypt");
-
 async  function registeruserfun(req,res)
 {
     console.log(req.ip);
