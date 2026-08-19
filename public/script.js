@@ -8,6 +8,16 @@ let findlocationbtn=document.getElementById("findlocationbtn");
 let placesdata;
 
 loadplaces();
+async function loadplaces(){
+    let data=await fetch("/places",{
+        method:"GET"
+    });
+    placesdata=await data.json();
+    if(placesdata.status==0){
+        alert("unable to load places");
+        return;
+    }
+}
 function initial(){
     locationdiv.style.display="none";
     userregisterdiv.style.display="none";
@@ -30,16 +40,7 @@ async function loaduserform() {
     initial();
     userlogindiv.style.display="block";
 }
-async function loadplaces(){
-    let data=await fetch("/places",{
-        method:"GET"
-    });
-    placesdata=await data.json();
-    if(placesdata.status==0){
-        alert("unable to load places");
-        return;
-    }
-}
+
 async function loaduserregister(){
     initial();
     userregisterdiv.style.display="block";
@@ -145,8 +146,7 @@ userregister.addEventListener("submit",async (event)=>{
         }
         return ;
     }
-    localStorage.setItem("logger",JSON.stringify(response));
-    window.location.href="user.html";
+    window.location.href="/";
 })
 userlogin.addEventListener("submit",async (event)=>{
     event.preventDefault();
@@ -160,17 +160,17 @@ userlogin.addEventListener("submit",async (event)=>{
         },
         body:obj
     });
+    userlogin.reset();
     response=await response.json();
     if (response.status == 0) {
-    console.log("no user");
+    alert("no user")
     return;
 }
-else if (response.status == 11) {
-    console.log("crt");
+else if (response.access==1 ) {
     window.location.href = "/userpage";
 }
 else {
-    console.log("wrong password");
+    alert("wrong password");
 }
 })
 shopregister.addEventListener("submit",async (event)=>{

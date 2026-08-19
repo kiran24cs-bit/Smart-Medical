@@ -5,7 +5,7 @@
   "main": "service.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.23.3",
     "nodemailer": "^9.0.5",
+    "nodemon": "^3.1.14",
     "path": "^0.12.7"
   }
 }
