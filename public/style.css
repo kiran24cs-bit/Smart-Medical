@@ -783,7 +783,9 @@ footer a:hover {
     background: rgba(37, 99, 235, 0.18);
     color: var(--primary-dark);
 }
-
+#map { height: 400px; width: 100%; margin-top: 10px; border-radius: 8px; }
+    .controls { display: flex; flex-direction: column; gap: 8px; max-width: 500px; }
+    input, button { padding: 8px; font-size: 14px; }
 
 /* =========================================================
    ANIMATIONS

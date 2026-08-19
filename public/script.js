@@ -152,6 +152,26 @@ userlogin.addEventListener("submit",async (event)=>{
     event.preventDefault();
     let form=new FormData(userlogin);
     let obj = Object.fromEntries(form);
+    obj=JSON.stringify(obj);
+    let response = await fetch("/userlogin",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:obj
+    });
+    response=await response.json();
+    if (response.status == 0) {
+    console.log("no user");
+    return;
+}
+else if (response.status == 11) {
+    console.log("crt");
+    window.location.href = "/userpage";
+}
+else {
+    console.log("wrong password");
+}
 })
 shopregister.addEventListener("submit",async (event)=>{
     event.preventDefault();
