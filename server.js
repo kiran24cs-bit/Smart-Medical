@@ -12,7 +12,7 @@ app.use(cookieParser());
 
 app.use("/owner", require("./routes/medicalshop.js"));
 app.use("/user", require("./routes/user.js"));
-
+app.use("/start",require("./routes/loadplaces.js"));
 const midd = require("./middleware/middel.js");
 app.use(midd);
 app.get("/",(req,res)=>{
@@ -22,17 +22,6 @@ app.get("/",(req,res)=>{
         return res.redirect("/userpage");
     }
     return;
-});
-app.get("/places",(req,res)=>{
-    db.query("select * from places order by place_name",[],(error,result)=>{
-        if(error){
-            res.json({
-                status:0
-            });
-            return;
-        }
-        res.json(result);
-    });
 });
 app.post("/userlogin",async (req,res)=>{
     let {mobile_number , password }=req.body;
@@ -85,7 +74,7 @@ app.get("/userpage",(req,res)=>{
     try{
         console.log("has cookie");
         let decoded=jwt.verify(token,process.env.SECRETKEY);
-        let usercookiek=decoded;
+        req.usercookiek=decoded;
         console.log(decoded);
         res.sendFile(path.join(__dirname, "user.html"));
     }
@@ -93,8 +82,6 @@ app.get("/userpage",(req,res)=>{
         res.clearCookie("sessioncookie");
         return res.redirect("/");
     }
-
-
 });
 app.get("/getuserlogindata",(req,res)=>{
     console.log("103 server");

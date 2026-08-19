@@ -9,7 +9,7 @@ let placesdata;
 
 loadplaces();
 async function loadplaces(){
-    let data=await fetch("/places",{
+    let data=await fetch("/start/places",{
         method:"GET"
     });
     placesdata=await data.json();
