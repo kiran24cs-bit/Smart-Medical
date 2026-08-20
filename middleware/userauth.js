@@ -1,21 +1,25 @@
+require("dotenv").config();
+const jwt=require("jsonwebtoken");
 async function userlogincheck(req,res,next){
     let token=req.cookies.sessioncookie;
         if(!token){
-            return res.redirect("/");
+            req.status=0;
+            req.access=0;
+            return next() ;
         }
         try{
-            console.log("7 middleware userauth.js");
             let decoded=jwt.verify(token,process.env.SECRETKEY);
             req.usercookiek=decoded;
-            console.log(req.usercookiek);
-            res.sendFile(path.join(__dirname, "user.html"));
+            req.status=1;
+            req.access=1;
+            next();
         }
-        catch{
+        catch(error){
             res.clearCookie("sessioncookie");
-            return res.redirect("/");
+            req.status=1;
+            req.access=0;
+            next();
         }
-    next();
-
+    
 }
-
 module.exports=userlogincheck;

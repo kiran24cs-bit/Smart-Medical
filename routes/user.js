@@ -2,7 +2,7 @@ const db=require("../db/db.js");
 const express=require("express");
 const router=express.Router();
 const bcrypt=require("bcrypt");
-const registeruserfun=require("../controller/contuser.js");
+const { registeruserfun , loginuserfun }=require("../controller/contuser.js");
 router.get("/getmedical",(req,res)=>{
     const mobile_number  =req.query.mobile_number;
     console.log("called");
@@ -33,5 +33,9 @@ WHERE u.mobile_number = ?`;
 });
 
 router.post("/userregister", registeruserfun);
+
+router.post("/userlogin",loginuserfun);
+
+
 
 module.exports=router;

@@ -13,3 +13,9 @@ window.addEventListener("load",async ()=>{
     console.log("10 userpagescript");
 }
 )
+
+document.getElementById("logoutbtn").addEventListener("click",async ()=>{
+    console.log("logout clicked");
+    let res=await fetch("/logout");
+    window.location.href="/";
+})

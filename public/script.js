@@ -5,6 +5,10 @@ let shopregisterdiv=document.getElementById("shopregisterdiv");
 let shoplogindiv=document.getElementById("shoplogindiv");
 let locationdiv=document.getElementById("locationdiv");
 let findlocationbtn=document.getElementById("findlocationbtn");
+let userregister=document.getElementById("userregister");
+let userlogin=document.getElementById("userlogin");
+let shopregister=document.getElementById("shopregister");
+let shoplogin=document.getElementById("shoplogin");
 let placesdata;
 
 loadplaces();
@@ -120,10 +124,7 @@ async function getmedical(x) {
     console.log(response);
 }
 
-let userregister=document.getElementById("userregister");
-let userlogin=document.getElementById("userlogin");
-let shopregister=document.getElementById("shopregister");
-let shoplogin=document.getElementById("shoplogin");
+
 
 userregister.addEventListener("submit",async (event)=>{
     event.preventDefault();
@@ -146,14 +147,24 @@ userregister.addEventListener("submit",async (event)=>{
         }
         return ;
     }
-    window.location.href="/";
+    userregister.reset();
+    alert(`created user id :${response.id}`);
+    response = await fetch("/user/userlogin",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:obj
+    });
+    response=await response.json();
+    window.location.href = "/userpage";
 })
 userlogin.addEventListener("submit",async (event)=>{
     event.preventDefault();
     let form=new FormData(userlogin);
     let obj = Object.fromEntries(form);
     obj=JSON.stringify(obj);
-    let response = await fetch("/userlogin",{
+    let response = await fetch("/user/userlogin",{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
@@ -163,16 +174,16 @@ userlogin.addEventListener("submit",async (event)=>{
     userlogin.reset();
     response=await response.json();
     if (response.status == 0) {
-    alert("no user")
-    return;
-}
-else if (response.access==1 ) {
-    window.location.href = "/userpage";
-}
-else {
-    alert("wrong password");
-}
-})
+        alert("no user")
+        return;
+    }
+    else if (response.access==1 ) {
+        window.location.href = "/userpage";
+    }
+    else {
+        alert("wrong password");
+    }
+});
 shopregister.addEventListener("submit",async (event)=>{
     event.preventDefault();
     let form=new FormData(shopregister);
@@ -196,6 +207,7 @@ shopregister.addEventListener("submit",async (event)=>{
         return ;
     }
     alert("resuest sent requset id : " + response.id);
+    
 })
 shoplogin.addEventListener("submit",async (event)=>{
     event.preventDefault();
