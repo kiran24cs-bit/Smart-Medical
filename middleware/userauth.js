@@ -5,7 +5,7 @@ async function userlogincheck(req,res,next){
         if(!token){
             req.status=0;
             req.access=0;
-            return next() ;
+            return next();
         }
         try{
             let decoded=jwt.verify(token,process.env.SECRETKEY);

@@ -2,6 +2,7 @@ const db=require("../db/db.js");
 const bcrypt=require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+
 async  function registeruserfun(req,res)
 {
     console.log(req.ip);
@@ -67,6 +68,12 @@ async function  loginuserfun(req,res){
         }
     })
 }
+async function userdetail(req,res){
+    let token=req.cookies.sessioncookie;
+    let decoded=jwt.verify(token,process.env.SECRETKEY);
+    let usercookiek=decoded;
+    return res.json(usercookiek);
+}
 
 
-module.exports={ registeruserfun , loginuserfun };
+module.exports={ registeruserfun , loginuserfun ,userdetail };

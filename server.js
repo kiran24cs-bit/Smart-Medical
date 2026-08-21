@@ -24,29 +24,10 @@ app.get("/userpage",userlogincheck,(req,res)=>{
     console.log("access = 0");
     return res.redirect("/");  
 });
-app.get("/getuserlogindata",(req,res)=>{
-    console.log("103 server");
-    let token=req.cookies.sessioncookie;
-    if(!token){
-        return res.redirect("/");
-    }
-    try{
-        console.log("has cookie");
-        let decoded=jwt.verify(token,process.env.SECRETKEY);
-        let usercookiek=decoded;
-        console.log(usercookiek);
-        return res.json(usercookiek);
-    }
-    catch{
-        res.clearCookie("sessioncookie");
-        return res.redirect("/");
-    }
-})
 
 
 
 app.get("/logout",(req,res)=>{
-    console.log("inside api logout");
     res.clearCookie("sessioncookie");
     res.send("loggedout");
 })

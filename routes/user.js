@@ -2,9 +2,11 @@ const db=require("../db/db.js");
 const express=require("express");
 const router=express.Router();
 const bcrypt=require("bcrypt");
-const { registeruserfun , loginuserfun }=require("../controller/contuser.js");
+const jwt=require("jsonwebtoken");
+const { registeruserfun , loginuserfun , userdetail }=require("../controller/contuser.js");
+const userlogincheck=require("../middleware/userauth.js");
 router.get("/getmedical",(req,res)=>{
-    const mobile_number  =req.query.mobile_number;
+    const id  =req.query.id;
     console.log("called");
     let query=`SELECT 
     u.place_name,
@@ -14,14 +16,16 @@ router.get("/getmedical",(req,res)=>{
     m.longitude,
     m.latitude,
     s.medicine_name,
-    s.medicine_stock
+    s.medicine_stock,
+    s.Price
 FROM users u
 JOIN medical_shop m 
     ON u.place_name = m.place_name
 JOIN medicine_stock s 
     ON m.id = s.medical_store_id
-WHERE u.mobile_number = ?`;
-    db.query(query,[mobile_number],(error , result)=>{
+WHERE u.id = ?
+    order by s.Price asc`;
+    db.query(query,[id],(error , result)=>{
         if(error){
             res.json({
                 status:0
@@ -33,9 +37,7 @@ WHERE u.mobile_number = ?`;
 });
 
 router.post("/userregister", registeruserfun);
-
 router.post("/userlogin",loginuserfun);
-
-
+router.get("/getuserlogindata",userdetail);
 
 module.exports=router;

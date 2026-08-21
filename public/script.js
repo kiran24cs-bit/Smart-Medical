@@ -116,13 +116,7 @@ function locateonmap(){
     window.open(mapurl, "_blank");
 }
 
-async function getmedical(x) {
-    let mobile_number="1";
-    let url=`/user/getmedical?mobile_number=${x}`;
-    let data=await fetch(url);
-    let response=await data.json();
-    console.log(response);
-}
+
 
 
 
@@ -217,9 +211,3 @@ shoplogin.addEventListener("submit",async (event)=>{
 })
 
 
-async function ext(){
-    let data=await fetch("/extraht");
-    console.log(data);
-    data=await data.json();
-    console.log(data);
-}
