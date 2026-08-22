@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const midd = require("./middleware/middel.js");
 const userlogincheck=require("./middleware/userauth.js");
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
@@ -14,7 +15,10 @@ app.use(cookieParser());
 app.use("/owner", require("./routes/medicalshop.js"));
 app.use("/user", require("./routes/user.js"));
 app.use("/start",require("./routes/loadplaces.js"));
-app.get("/",(req,res)=>{
+app.get("/",userlogincheck,(req,res)=>{
+    if(req.access==1){
+        return res.sendFile(path.join(__dirname,"user.html"));    
+    }
     return res.sendFile(__dirname,"public","index.html")
 });
 app.get("/userpage",userlogincheck,(req,res)=>{

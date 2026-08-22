@@ -54,7 +54,8 @@ async function  loginuserfun(req,res){
             res.cookie("sessioncookie",token,{
                 httpOnly:true,
                 secure:false,
-                sameSite:"lax"
+                sameSite:"lax",
+                maxAge: 1 * 60 * 1000
             });
             console.log("gave token");
             return res.json({
