@@ -3,11 +3,10 @@ const express=require("express");
 const router=express.Router();
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
-const { registeruserfun , loginuserfun , userdetail }=require("../controller/contuser.js");
+const { registeruserfun , loginuserfun , userdetail,searchmedicine }=require("../controller/contuser.js");
 const userlogincheck=require("../middleware/userauth.js");
 router.get("/getmedical",(req,res)=>{
     const id  =req.query.id;
-    console.log("called");
     let query=`SELECT 
     u.place_name,
     m.owner_name,
@@ -39,5 +38,5 @@ WHERE u.id = ?
 router.post("/userregister", registeruserfun);
 router.post("/userlogin",loginuserfun);
 router.get("/getuserlogindata",userdetail);
-
+router.get("/searchmedicine",searchmedicine);
 module.exports=router;

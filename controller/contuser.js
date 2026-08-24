@@ -57,7 +57,6 @@ async function  loginuserfun(req,res){
                 sameSite:"lax",
                 maxAge: 1 * 60 * 1000
             });
-            console.log("gave token");
             return res.json({
                 access:1
             });   
@@ -75,6 +74,37 @@ async function userdetail(req,res){
     let usercookiek=decoded;
     return res.json(usercookiek);
 }
-
-
-module.exports={ registeruserfun , loginuserfun ,userdetail };
+async function searchmedicine(req,res) {
+    const id  =req.query.id;
+    const medname=req.query.medname;
+    let query=`SELECT 
+    u.place_name,
+    m.owner_name,
+    m.mobile_number,
+    m.medical_shop_name,
+    m.longitude,
+    m.latitude,
+    s.medicine_name,
+    s.medicine_stock,
+    s.Price
+FROM users u
+JOIN medical_shop m 
+    ON u.place_name = m.place_name
+JOIN medicine_stock s 
+    ON m.id = s.medical_store_id
+WHERE u.id = ?
+and 
+medicine_name like ?
+    order by s.Price asc`;
+    db.query(query,[id,`%${medname}%`],(error , result)=>{
+        if(error){
+            console.log(" error");
+            res.json({
+                status:0
+            });
+            return;
+        }
+        res.json(result);
+    });
+}
+module.exports={ registeruserfun , loginuserfun ,userdetail,searchmedicine };

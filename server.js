@@ -24,9 +24,7 @@ app.get("/",userlogincheck,(req,res)=>{
 app.get("/userpage",userlogincheck,(req,res)=>{
     if(req.access==1){
         return res.sendFile(path.join(__dirname,"user.html"));
-    }
-    console.log("access = 0");
-    return res.redirect("/");  
+    }    return res.redirect("/");  
 });
 
 

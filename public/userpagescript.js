@@ -1,5 +1,9 @@
 let username;
 let userplace;
+let userid;
+let timeout;
+let search=document.getElementById("medicinesearch");
+search.addEventListener("keyup",getmedicinebyname);
 let editprofile=document.getElementById("editprofile");
 window.addEventListener("load",async ()=>{
     let data=await fetch("/user/getuserlogindata");
@@ -7,7 +11,7 @@ window.addEventListener("load",async ()=>{
     console.log(data);
     username=data.name;
     userplace=data.place;
-    console.log(data.id);
+    userid=data.id;
     document.getElementById("username").innerText=username;
     document.getElementById("userplace").innerText=userplace;
     editprofile.innerText=username[0];
@@ -25,7 +29,30 @@ async function getmedical(id) {
     let url=`/user/getmedical?id=${id}`;
     let data=await fetch(url);
     let response=await data.json();
-    console.log(response);
+    createtable(response);
+    
+}
+
+async function getmedicinebyname(){
+    let medicinename=search.value;
+    clearTimeout(timeout);
+    timeout=setTimeout(async ()=>{
+        console.log(medicinename)
+        let response=await fetch(`/user/searchmedicine?id=${userid}&medname=${medicinename}`);
+        response=await response.json();
+        if(response.status==0){
+            alert("unable to load medicine");
+            return;
+        }
+        createtable(response);
+    },500);
+}
+
+function createtable(response){
+    let table = document.getElementById("medicinetable");
+    while (table.children.length > 1) {
+        table.removeChild(table.children[1]);
+    }
     for(let medicine of response){
         let table=document.getElementById("medicinetable");
         let row=document.createElement("tr");
@@ -47,6 +74,7 @@ async function getmedical(id) {
         let locate=document.createElement("a");
         locate.href=`https://www.google.com/maps?q=${medicine.latitude},${medicine.longitude}`;
         locate.innerText="Locate Medical Shop";
+        locate.target="_blank";
         map.appendChild(locate);
         row.appendChild(shop);
         row.appendChild(number);
