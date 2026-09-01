@@ -27,7 +27,18 @@ app.get("/userpage",userlogincheck,(req,res)=>{
     }    return res.redirect("/");  
 });
 
-
+app.get("/shoprequest",(req,res)=>{
+    db.query("select * from shoprequest",(err,result)=>{
+        if(err){
+            return res.json({
+                status:0,
+                error:err
+            })
+        }
+        console.log(result);
+        return res.json(result);
+    })
+})
 
 app.get("/logout",(req,res)=>{
     res.clearCookie("sessioncookie");

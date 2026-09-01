@@ -20,7 +20,6 @@ window.addEventListener("load",async ()=>{
 )
 document.getElementById("logoutbtn").addEventListener("click",async ()=>{
     let res=await fetch("/logout");
-    //window.close();
     window.location.href="/";
 })
 

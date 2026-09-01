@@ -210,4 +210,9 @@ shoplogin.addEventListener("submit",async (event)=>{
     console.log(obj);
 })
 
+document.getElementById("admin").addEventListener("click",async ()=>{
+    let data=await fetch("/shoprequest");
+    data=await data.json();
+    console.log(data);
+})
 
