@@ -8,7 +8,7 @@ const db=mysql.createConnection({
 });
 db.connect((error)=>{
     if(error){
-        console.log("unalbe to connect");
+        console.log("unalbe to connect",error.message);
     }
     else{
         console.log("no error");

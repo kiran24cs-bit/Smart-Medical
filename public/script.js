@@ -207,7 +207,24 @@ shoplogin.addEventListener("submit",async (event)=>{
     event.preventDefault();
     let form=new FormData(shoplogin);
     let obj = Object.fromEntries(form);
-    console.log(obj);
+    console.log(obj)
+    let res= await fetch("/shoplogin",{
+        method:"POST",
+        headers:{
+            "COntent-Type":"application/json"
+        },
+        body:JSON.stringify(obj)
+    });
+    res=await res.json();
+    if(res.status==1){
+        console.log(res.msg);
+        window.location.href="/entershop";
+        return;
+    }
+    else{
+        console.log("no data")
+        return;
+    }
 })
 
 document.getElementById("admin").addEventListener("click",async ()=>{
