@@ -2,6 +2,13 @@ shopname=document.getElementById("shopname");
 ownername=document.getElementById("ownername");
 shopmobile=document.getElementById("shopmobile");
 shopProfileId=document.getElementById("shopProfileId");
+addmedicinediv=document.getElementById("addmedicinediv");
+medicineStockEditor=document.getElementById("medicineStockEditor");
+shopProfileDiv=document.getElementById("shopProfileDiv");
+updatestockbtn=document.getElementById("updatestockbtn");
+addmedicinebtn=document.getElementById("addmedicinebtn");
+medicineAlertButton=document.getElementById("medicineAlertButton");
+profilebtn=document.getElementById("profilebtn");
 window.addEventListener("load",async ()=>{
     let data=await fetch("/getshoplogindata");
     data=await data.json();
@@ -19,14 +26,6 @@ async function allmedicine(limit){
     let response=await data.json();
     displaymedicine(response);
 }
-
-
-
-
-addmedicinediv=document.getElementById("addmedicinediv");
-medicineStockEditor=document.getElementById("medicineStockEditor");
-shopProfileDiv=document.getElementById("shopProfileDiv");
-
 function hidediv(){
     addmedicinediv.style.display="none";
     medicineStockEditor.style.display="none";
@@ -37,10 +36,7 @@ function showdiv(curdiv){
     hidediv();
     curdiv.style.display="block"
 }
-updatestockbtn=document.getElementById("updatestockbtn");
-addmedicinebtn=document.getElementById("addmedicinebtn");
-medicineAlertButton=document.getElementById("medicineAlertButton");
-profilebtn=document.getElementById("profilebtn");
+
 profilebtn.addEventListener("click",()=>{
     showdiv(shopProfileDiv);
 })
