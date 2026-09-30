@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const midd = require("./middleware/middel.js");
 const userlogincheck=require("./middleware/userauth.js");
 const { Stats } = require("fs");
+const { error } = require("console");
 require("dotenv").config();
 let PORT=process.env.PORT || 3100
 app.use(express.static("public"));
@@ -46,6 +47,32 @@ app.get("/entershop",(req,res)=>{
     }
     res.sendFile(path.join(__dirname,"shop.html"));
 })
+app.get("/getshoplogindata",(req,res)=>{
+    let token=req.cookies.sessioncookie;
+    
+    if(!token){
+        return res.redirect("/");
+    }
+    let decoded=jwt.verify(token,process.env.SECRETKEY);
+    let shopcookiek=decoded;
+    return res.json(shopcookiek);
+})
+
+app.get("/shopmedicalstock/:id/:limit",(req,res)=>{
+    let id=req.params.id;
+    let limit=req.params.limit;
+    db.query("select * from medicine_stock where medical_store_id=? and medicine_stock<=?",[id,limit],(error,result)=>{
+        if(error){
+            res.json({
+                status:0,
+                err:error
+            });
+        }
+        return res.json(result);
+    })
+})
+
+
 
 app.post("/shoplogin",(req,res)=>{
     console.log("got request");
@@ -61,7 +88,11 @@ app.post("/shoplogin",(req,res)=>{
             console.log(result[0]);
             if(result[0].password==data.password){
                 let token=jwt.sign({
-                    shopname:data.medical_shop_name,
+                    shopname:result[0].medical_shop_name,
+                    ownername:result[0].owner_name,
+                    placename:result[0].place_name,
+                    mobilenumber:result[0].mobile_number,
+                    shopid:result[0].id
                 },
                 process.env.SECRETKEY,
                 {
